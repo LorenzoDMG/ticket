@@ -5,7 +5,7 @@ if(isset($_POST['fname']) &&
    isset($_POST['pass']) && 
    isset($_POST['email'])){
 
-    include "./dbconn.php";  
+    include "../php/dbconn.php";  
 
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];

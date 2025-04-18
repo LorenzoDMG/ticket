@@ -2,7 +2,7 @@
 <?php
 session_start();
 require_once 'header.php';
-require_once 'dbconn.php';
+require_once '../php/dbconn.php';
 ?>
 <?php
 
@@ -14,6 +14,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $success = !empty($title) && !empty($description);
 
     if ($success) {
+        try {
+            $sql = "INSERT INTO Ticket (Title, Description) 
+                    VALUES (?, ? )";
+            $stmt = $db->prepare($sql);
+            $stmt->execute([$title, $description]);
+    
+            header("Location: ../../index.php?success=Your account has been created successfully");  
+            exit;
+        } catch (PDOException $e) {
+            $em = "Error: " . $e->getMessage();
+            header("Location: ../../signup.php?error=$em&$data");
+            exit;
+        }
         $message = "Ticket created successfully!";
     } else {
         $message = "Please fill in all fields.";
