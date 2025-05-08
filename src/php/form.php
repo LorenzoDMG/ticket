@@ -1,6 +1,6 @@
 <?php
 require_once 'header.php';
-require_once '../php/dbconn.php';
+require_once './dbconn.php';
 ?>
 <?php
 if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['message'])) {
@@ -9,14 +9,14 @@ if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['message']))
     $message = $_POST['message'];
 
     // Validate the input
-    if (empty($name) || empty($email) || empty($message)) {
+    if (empty($Name) || empty($Email) || empty($message)) {
         echo "All fields are required.";
         exit;
     }
 
     // Insert into database
     $stmt = $db->prepare("INSERT INTO feedback (name, email, message) VALUES (?, ?, ?)");
-    if ($stmt->execute([$name, $email, $message])) {
+    if ($stmt->execute([$Name, $Email, $Message])) {
         echo "Feedback submitted successfully.";
     } else {
         echo "Error submitting feedback.";
