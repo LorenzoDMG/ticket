@@ -8,7 +8,6 @@
              <a href="" class="text-gray-600 hover:text-indigo-600 hover:underline transition duration-300">profil</a> 
             <a href="/login.php" class="text-gray-600 hover:text-indigo-600 hover:underline transition duration-300">login</a>
             <a href="/src/php/create_ticket.php" class="text-gray-600 hover:text-indigo-600 hover:underline transition duration-300">ticket</a>
-            <a href="/src/php/form.php" class="text-gray-600 hover:text-indigo-600 hover:underline transition duration-300">contact</a>
         </nav>
     </div>
 </header>

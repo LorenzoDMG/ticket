@@ -15,7 +15,7 @@ if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['message']))
     }
 
     // Insert into database
-    $stmt = $db->prepare("INSERT INTO feedback (Name, Email, Message) VALUES (?, ?, ?)");
+    $stmt = $db->prepare("INSERT INTO feedback (Id, Ticket_Id, Message) VALUES (?, ?, ?)");
     if ($stmt->execute([$name, $email, $message])) {
         echo "Feedback submitted successfully.";
     } else {

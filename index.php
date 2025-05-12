@@ -18,7 +18,7 @@
     <p class="text-gray-600 mb-8">
       Une interface claire, simple, et efficace pour vos besoins quotidiens.
     </p>
-    <a href="./src/php/form.php"
+    <a href="./src/php/create_ticket.php"
        class="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700 transition">
       Commencer
     </a>
