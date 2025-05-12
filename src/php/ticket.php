@@ -45,8 +45,9 @@ if (isset($_POST))
             <label class="block text-gray-700 font-medium">Created At:</label>
             <p class="text-gray-900"><?php echo htmlspecialchars($result['Created_at']); ?></p>
         </div>
-        <form action="src/php/create_ticket.php" method="post">
+        <form action="./response_ticket.php" method="post">
             <div class="mb-4">
+                <input type="hidden" name="ticket_id" value="<?php echo htmlspecialchars($result['Id']); ?>">   
                 <label for="response" class="block text-gray-700 font-medium">Response:</label>
                 <textarea id="response" name="response" rows="4" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required></textarea>
             </div>
