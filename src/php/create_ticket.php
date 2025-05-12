@@ -31,7 +31,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $message = "Please fill in all fields.";
     }
+
+
 }
+// Fetch all tickets from the database
+$tickets = [];
+$ticketsDb="SELECT * FROM Ticket";
+$stmt = $db->prepare($ticketsDb);
+$stmt->execute();
+$stmt->setFetchMode(PDO::FETCH_ASSOC);
+while ($row = $stmt->fetch()) {
+    $tickets[] = $row;
+}
+$stmt->closeCursor();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,6 +57,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body class="bg-gray-100 flex items-center justify-center min-h-screen">
     <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
         <h1 class="text-2xl font-bold mb-4 text-gray-800">e-ticket</h1>
+        <?php foreach ($tickets as $ticket) {
+            echo "<div class='mb-4 p-4 bg-gray-200 rounded'>";
+            echo "<h2 class='text-lg font-semibold'>" . htmlspecialchars($ticket['Title']) . "</h2>";
+            echo "<p>" . htmlspecialchars($ticket['Description']) . "</p>";
+            //add link
+            echo "<a href='ticket.php?id=" . htmlspecialchars($ticket['Id']) . "' class='text-blue-500 hover:underline'>View Ticket</a>";
+            echo "</div>";
+        } ?>
         <?php if (isset($message)): ?>
             <div class="mb-4 p-4 text-white <?= $success ? 'bg-green-500' : 'bg-red-500' ?> rounded">
                 <?= $message ?>

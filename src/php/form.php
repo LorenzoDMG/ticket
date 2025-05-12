@@ -9,14 +9,14 @@ if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['message']))
     $message = $_POST['message'];
 
     // Validate the input
-    if (empty($Name) || empty($Email) || empty($message)) {
+    if (empty($name) || empty($email) || empty($message)) {
         echo "All fields are required.";
         exit;
     }
 
     // Insert into database
-    $stmt = $db->prepare("INSERT INTO feedback (name, email, message) VALUES (?, ?, ?)");
-    if ($stmt->execute([$Name, $Email, $Message])) {
+    $stmt = $db->prepare("INSERT INTO feedback (Name, Email, Message) VALUES (?, ?, ?)");
+    if ($stmt->execute([$name, $email, $message])) {
         echo "Feedback submitted successfully.";
     } else {
         echo "Error submitting feedback.";
