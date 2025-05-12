@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once '../php/dbconn.php';
 
 if (
    isset($_POST['uname']) &&

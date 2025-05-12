@@ -4,30 +4,16 @@ require_once 'header.php';
 require_once '../php/dbconn.php';
 ?>
 <?php
-// profil.php
 
-session_start();
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['id'])) {
     header("Location: login.php");
     exit();
 }
 
-// Connexion à la base de données
-$host = 'localhost';
-$dbname = 'votre_base_de_donnees';
-$username = 'votre_utilisateur';
-$password = 'votre_mot_de_passe';
-
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Erreur de connexion à la base de données : " . $e->getMessage());
-}
 
 // Récupération des informations utilisateur
-$user_id = $_SESSION['user_id'];
-$stmt = $pdo->prepare("SELECT * FROM users WHERE id = :id");
+$user_id = $_SESSION['id'];
+$stmt = $db->prepare("SELECT * FROM users WHERE id = :id");
 $stmt->execute(['id' => $user_id]);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -35,6 +21,10 @@ if (!$user) {
     echo "Utilisateur non trouvé.";
     exit();
 }
+
+// Directly use the values from the $user array
+$username = htmlspecialchars($user['username']);
+$email = htmlspecialchars($user['email']);
 ?>
 
 <!DOCTYPE html>
@@ -48,18 +38,14 @@ if (!$user) {
 <body class="bg-gray-100">
     <div class="container mx-auto mt-10">
         <div class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md">
-            <h1 class="text-2xl font-bold text-center mb-4">Profil de <?php echo htmlspecialchars($user['username']); ?></h1>
+            <h1 class="text-2xl font-bold text-center mb-4">Profil de <?php echo $username; ?></h1>
             <div class="mb-4">
                 <label class="block text-gray-700 font-medium">Nom d'utilisateur :</label>
-                <p class="text-gray-900"><?php echo htmlspecialchars($user['username']); ?></p>
+                <p class="text-gray-900"><?php echo $username; ?></p>
             </div>
             <div class="mb-4">
                 <label class="block text-gray-700 font-medium">Email :</label>
-                <p class="text-gray-900"><?php echo htmlspecialchars($user['email']); ?></p>
-            </div>
-            <div class="mb-4">
-                <label class="block text-gray-700 font-medium">Date de création :</label>
-                <p class="text-gray-900"><?php echo htmlspecialchars($user['created_at']); ?></p>
+                <p class="text-gray-900"><?php echo $email; ?></p>
             </div>
             <div class="text-center">
                 <a href="logout.php" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Déconnexion</a>
