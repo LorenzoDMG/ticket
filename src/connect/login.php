@@ -46,7 +46,7 @@ if (
                   $_SESSION['lname'] = $lname;
                   $_SESSION['login_success'] = true;
                   $_SESSION['role_id'] = $user['Role_id'];
-                  
+
                   header("Location: ../../index.php");
                   exit;
                } else {

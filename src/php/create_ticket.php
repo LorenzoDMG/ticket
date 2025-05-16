@@ -1,6 +1,4 @@
-
 <?php
-session_start();
 require_once 'header.php';
 require_once '../php/dbconn.php';
 ?>
@@ -54,7 +52,7 @@ $stmt->closeCursor();
     <title>Create Ticket</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+<body class="bg-gray-100 flex items-center justify-center min-h-screen relative pb-20">
     <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
         <h1 class="text-2xl font-bold mb-4 text-gray-800">e-ticket</h1>
         <?php foreach ($tickets as $ticket) {
@@ -84,6 +82,10 @@ $stmt->closeCursor();
             </button>
         </form>
     </div>
+    <?php
+    require_once 'header.php';
+    require_once 'footer.php';
+    ?>
 </body>
 </html>
 <?php
