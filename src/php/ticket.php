@@ -26,37 +26,41 @@ if (isset($_POST))
     <title>Create Ticket</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen">
-    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-        <h1 class="text-2xl font-bold mb-4 text-gray-800">e-ticket</h1>
-        <div class="mb-4">
-            <label class="block text-gray-700 font-medium">Ticket ID:</label>
-            <p class="text-gray-900"><?php echo htmlspecialchars($result['Id']); ?></p>
-        </div>
-        <div class="mb-4">
-            <label class="block text-gray-700 font-medium">Title:</label>
-            <p class="text-gray-900"><?php echo htmlspecialchars($result['Title']); ?></p>
-        </div>
-        <div class="mb-4">
-            <label class="block text-gray-700 font-medium">Description:</label>
-            <p class="text-gray-900"><?php echo htmlspecialchars($result['Description']); ?></p>
-        </div>
-        <div class="mb-4">
-            <label class="block text-gray-700 font-medium">Created At:</label>
-            <p class="text-gray-900"><?php echo htmlspecialchars($result['Created_at']); ?></p>
-        </div>
-        <form action="./response_ticket.php" method="post">
+<body class="bg-gray-800 text-gray-300 font-sans relative pb-20">
+
+    <div class="mt-16 w-7/12 mx-auto px-4 py-12 pb-20 text-center">
+        <div class="bg-gray-700 p-8 rounded-lg shadow-lg w-full max-w-md mx-auto">
+            <h1 class="text-3xl font-bold text-indigo-400 mb-6">e-ticket</h1>
             <div class="mb-4">
-                <input type="hidden" name="ticket_id" value="<?php echo htmlspecialchars($result['Id']); ?>">   
-                <label for="response" class="block text-gray-700 font-medium">Response:</label>
-                <textarea id="response" name="response" rows="4" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required></textarea>
+                <label class="block text-gray-300 font-medium">Ticket ID:</label>
+                <p class="text-gray-100"><?php echo htmlspecialchars($result['Id']); ?></p>
             </div>
-            <button type="submit" class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                Submit Response
-            </button>
-        </form>
+            <div class="mb-4">
+                <label class="block text-gray-300 font-medium">Title:</label>
+                <p class="text-gray-100"><?php echo htmlspecialchars($result['Title']); ?></p>
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-300 font-medium">Description:</label>
+                <p class="text-gray-100"><?php echo htmlspecialchars($result['Description']); ?></p>
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-300 font-medium">Created At:</label>
+                <p class="text-gray-100"><?php echo htmlspecialchars($result['Created_at']); ?></p>
+            </div>
+            <form action="./response_ticket.php" method="post">
+                <div class="mb-4">
+                    <input type="hidden" name="ticket_id" value="<?php echo htmlspecialchars($result['Id']); ?>">   
+                    <label for="response" class="block text-gray-300 font-medium">Response:</label>
+                    <textarea id="response" name="response" rows="4" class="mt-1 block w-full px-3 py-2 border border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 bg-gray-800 text-gray-300 sm:text-sm" required></textarea>
+                </div>
+                <button type="submit" class="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition">
+                    Submit Response
+                </button>
+            </form>
+        </div>
     </div>
-        </body>
+    <?php require_once 'footer.php'; ?>
+</body>
 </html>
 
 <?php

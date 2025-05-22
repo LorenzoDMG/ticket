@@ -1,15 +1,23 @@
 <?php
 require_once 'header.php';
+require_once 'dbconn.php'; // Assurez-vous que ce fichier contient la connexion à la base de données
 
 // Vérifiez si l'utilisateur est connecté
 if (!isset($_SESSION['id'])) {
-    header("Location: login.php");
+    header("Location: ../../login.php");
     exit();
 }
 
 // Récupération des informations depuis la session
 $username = htmlspecialchars($_SESSION['fname'] . ' ' . $_SESSION['lname']);
-$role_id = $_SESSION['role_id'];
+$user_id = $_SESSION['id'];
+
+// Récupérer le rôle de l'utilisateur depuis la base de données
+$query = $db->prepare("SELECT Roles.Name AS role_name FROM Users 
+                       JOIN Roles ON Users.Role_id = Roles.Id 
+                       WHERE Users.Id = ?");
+$query->execute([$user_id]);
+$user_role = $query->fetch(PDO::FETCH_ASSOC)['role_name'] ?? 'Utilisateur';
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -34,7 +42,7 @@ $role_id = $_SESSION['role_id'];
                 </div>
                 <div class="bg-gray-800 p-6 rounded-lg shadow-md">
                     <label class="block text-gray-400 font-medium mb-2">Rôle :</label>
-                    <p class="text-gray-200 text-lg font-semibold"><?php echo $role_id == 1 ? 'Admin' : 'Utilisateur'; ?></p>
+                    <p class="text-gray-200 text-lg font-semibold"><?php echo htmlspecialchars($user_role); ?></p>
                 </div>
             </div>
             <div class="mt-8">
