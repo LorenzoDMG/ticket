@@ -171,6 +171,10 @@ CREATE TABLE `Users` (
   `Created_by` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+INSERT INTO `Users` (`Id`, `Role_id`, `Username`, `Firstname`, `Lastname`, `Password`, `mail`, `Image`, `Status`, `Created_at`) 
+VALUES (1, 1, 'admin', 'Admin', 'User', '$2y$10$examplepasswordhash', 'admin@example.com', NULL, 'Y', NOW())
+ON DUPLICATE KEY UPDATE Id=Id;
+
 --
 -- Index pour les tables déchargées
 --
