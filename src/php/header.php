@@ -1,57 +1,96 @@
-<?php
-session_start();
-?>
+<?php session_start(); ?>
 
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
-    header {
-        position: fixed;
-        top: 0;
-        width: 100%;
-        z-index: 50;
-        background-color: rgba(31, 41, 55, 0.8); /* Transparent background */
-        box-shadow: 0 0 20px rgba(59, 130, 246, 0.5), 0 0 40px rgba(59, 130, 246, 0.3); /* Glow effect */
+    /* Styles du nouveau header */
+    .glass-effect {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .text-shimmer {
+        background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899, #3b82f6);
+        background-size: 200% auto;
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: shimmer 3s linear infinite;
+    }
+
+    @keyframes shimmer {
+        0% { background-position: 0% center }
+        100% { background-position: 200% center }
+    }
+
+    nav#main-nav {
         transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     }
-    header.scrolled {
+
+    nav#main-nav.scrolled {
         transform: translateY(-10px);
-        background-color: rgba(31, 41, 55, 0.9); /* Slightly darker transparent background */
-        box-shadow: 0 0 30px rgba(59, 130, 246, 0.7), 0 0 50px rgba(59, 130, 246, 0.5); /* Stronger glow */
+        background-color: rgba(31, 41, 55, 0.9);
+        box-shadow: 0 0 30px rgba(59, 130, 246, 0.7), 0 0 50px rgba(59, 130, 246, 0.5);
     }
+
     .content {
-        padding-top: 80px; /* Adjust this value to match the header height */
+        padding-top: 80px;
+    }
+    
+    .magnetic-effect {
+        transition: transform 0.3s ease-out;
     }
 </style>
+
 <script>
-    document.addEventListener('scroll', () => {
-        const header = document.querySelector('header');
-        if (window.scrollY > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
+    // Effet magnétique pour les liens
+    function initMagneticEffect() {
+        document.querySelectorAll('.magnetic-effect').forEach(el => {
+            el.addEventListener('mousemove', (e) => {
+                const rect = el.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                
+                el.style.transform = `translate(${x * 0.1}px, ${y * 0.1}px)`;
+            });
+            
+            el.addEventListener('mouseleave', () => {
+                el.style.transform = 'translate(0px, 0px)';
+            });
+        });
+    }
+
+    // Effet de scroll
+    document.addEventListener('DOMContentLoaded', () => {
+        initMagneticEffect();
+        
+        // Gestion du scroll
+        document.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav#main-nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
     });
 </script>
 
-<header class="bg-gray-800 shadow-sm w-full">
-    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-        <a href="/index.php">
-            <h1 class="text-3xl font-bold text-indigo-400">e-ticket</h1>
-        </a>
-        <nav class="space-x-6">
-            <!-- PROFIL -->
-            <a href="/src/php/profil.php" class="text-gray-300 hover:text-white hover:no-underline hover:scale-105 hover:bg-blue-500 px-3 py-2 rounded-lg transition duration-300">profil</a>
-            <!-- LOGIN/LOGOUT -->
-            <?php if (isset($_SESSION['id'])): ?>
-                <a href="/src/php/logout.php" class="text-gray-300 hover:text-white hover:no-underline hover:scale-105 hover:bg-red-500 px-3 py-2 rounded-lg transition duration-300">logout</a>
-            <?php else: ?>
-                <a href="/login.php" class="text-gray-300 hover:text-white hover:no-underline hover:scale-105 hover:bg-blue-500 px-3 py-2 rounded-lg transition duration-300">login</a>
-            <?php endif; ?>
-            <!-- TICKET -->
-            <a href="/src/php/create_ticket.php" class="text-gray-300 hover:text-white hover:no-underline hover:scale-105 hover:bg-blue-500 px-3 py-2 rounded-lg transition duration-300">ticket</a>
-        </nav>
+<nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 glass-effect">
+    <div class="max-w-7xl mx-auto px-6 py-4">
+        <div class="flex items-center justify-between">
+            <a href="/index.php" class="text-2xl font-bold text-shimmer">e-ticket</a>
+            <div class="flex space-x-6">
+                <a href="/src/php/profil.php" class="text-gray-300 hover:text-blue-400 transition-colors duration-300 magnetic-effect">profil</a>
+                
+                <?php if (isset($_SESSION['id'])): ?>
+                    <a href="/src/php/logout.php" class="text-gray-300 hover:text-blue-400 transition-colors duration-300 magnetic-effect">logout</a>
+                <?php else: ?>
+                    <a href="/login.php" class="text-gray-300 hover:text-blue-400 transition-colors duration-300 magnetic-effect">login</a>
+                <?php endif; ?>
+                
+                <a href="/src/php/create_ticket.php" class="text-gray-300 hover:text-blue-400 transition-colors duration-300 magnetic-effect">ticket</a>
+            </div>
+        </div>
     </div>
-</header>
-<div class="content">
-    <!-- ...existing code for the page content... -->
-</div>
+</nav>
