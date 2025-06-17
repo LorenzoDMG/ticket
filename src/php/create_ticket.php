@@ -55,11 +55,12 @@ $stmt->closeCursor();
         
         body {
             font-family: 'Inter', sans-serif;
+            height: 90%;
         }
         
         .gradient-bg {
             background: linear-gradient(-45deg, #0f172a, #1e1b4b, #312e81, #1e293b);
-            background-size: 400% 400%;
+            background-size: 350% 400%;
             animation: gradientShift 8s ease infinite;
         }
         
@@ -252,8 +253,8 @@ $stmt->closeCursor();
     <div class="floating-orb orb-3"></div>
 
     <!-- Main Content -->
-    <main class="min-h-screen pt-20 px-6">
-        <div class="max-w-6xl mx-auto py-12">
+
+        <div class="max-w-6xl mx-auto py-11">
             <!-- Page Header -->
             <div class="text-center mb-12 stagger-fade" style="animation-delay: 0.2s">
                 <h1 class="text-5xl md:text-6xl font-extrabold mb-4 text-shimmer">

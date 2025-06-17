@@ -1,6 +1,8 @@
-<?php session_start(); ?>
+<?php session_start(); 
+error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
+ini_set('display_errors', '0'); 
+?>
 
-<script src="https://cdn.tailwindcss.com"></script>
 <style>
     /* Styles du nouveau header */
     .glass-effect {
@@ -25,6 +27,7 @@
 
     nav#main-nav {
         transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        position: static; /* Ajouté pour s'assurer que le header est solide */
     }
 
     nav#main-nav.scrolled {
@@ -43,8 +46,7 @@
 </style>
 
 <script>
-    // Effet magnétique pour les liens
-    function initMagneticEffect() {
+        // Magnetic Effect
         document.querySelectorAll('.magnetic-effect').forEach(el => {
             el.addEventListener('mousemove', (e) => {
                 const rect = el.getBoundingClientRect();
@@ -58,7 +60,6 @@
                 el.style.transform = 'translate(0px, 0px)';
             });
         });
-    }
 
     // Effet de scroll
     document.addEventListener('DOMContentLoaded', () => {
@@ -76,7 +77,7 @@
     });
 </script>
 
-<nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 glass-effect">
+<nav id="main-nav" class="glass-effect">
     <div class="max-w-7xl mx-auto px-6 py-4">
         <div class="flex items-center justify-between">
             <a href="/index.php" class="text-2xl font-bold text-shimmer">e-ticket</a>

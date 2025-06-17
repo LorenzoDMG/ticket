@@ -197,10 +197,10 @@ $user_role = $query->fetch(PDO::FETCH_ASSOC)['role_name'] ?? 'Utilisateur';
     <div class="floating-orb orb-3"></div>
 
     <!-- Main Content -->
-    <main class="min-h-screen flex items-center justify-center px-6 pt-20">
+    <main class="min-h-screen flex items-center justify-center px-6 pt-8">
         <div class="max-w-4xl mx-auto">
             <!-- Profile Section -->
-            <div class="glass-effect rounded-3xl p-12 hover-lift pulse-glow">
+            <div class="glass-effect rounded-3xl p-8 hover-lift pulse-glow relative z-20">
                 <!-- Profile Header -->
                 <div class="text-center mb-12 stagger-fade" style="animation-delay: 0.2s">
                     <!-- Avatar -->
@@ -279,7 +279,7 @@ $user_role = $query->fetch(PDO::FETCH_ASSOC)['role_name'] ?? 'Utilisateur';
                 </div>
                 
                 <!-- Action Buttons -->
-                <div class="flex flex-col sm:flex-row gap-4 justify-center stagger-fade" style="animation-delay: 1.4s">
+                <div class="flex flex-col sm:flex-row gap-4 justify-center stagger-fade mt-8" style="animation-delay: 1.4s">
                     <button class="group relative bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white font-semibold py-4 px-8 rounded-full text-lg hover-lift magnetic-effect overflow-hidden">
                         <span class="relative z-10">Modifier le profil</span>
                         <div class="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>

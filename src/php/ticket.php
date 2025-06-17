@@ -121,7 +121,7 @@ $db = null;
 </head>
 <body class="bg-gray-800 text-gray-300 font-sans relative pb-20 fade-in">
     <div class="mt-16 w-7/12 mx-auto px-4 py-12 pb-20 text-center fade-in">
-        <div class="bg-gray-700 p-8 rounded-lg shadow-lg w-full max-w-md mx-auto hover-rotate hover-glow">
+        <div class="bg-gray-700 p-8 rounded-lg shadow-lg w-full max-w-md mx-auto hover-glow">
             <h1 class="text-3xl font-bold text-indigo-400 mb-6 text-glow">e-ticket</h1>
             <div class="mb-4 hover-scale">
                 <label class="block text-gray-300 font-medium">Ticket ID:</label>
