@@ -2,8 +2,7 @@
 require_once 'header.php';
 require_once 'dbconn.php';
 if (!isset($_SESSION['id'])) {
-    header("Location: ../../login.php");
-    exit();
+
 }
 // Récupération des informations depuis la session
 $username = htmlspecialchars($_SESSION['fname'] . ' ' . $_SESSION['lname']);
@@ -13,7 +12,8 @@ $query = $db->prepare("SELECT Roles.Name AS role_name FROM Users
     JOIN Roles ON Users.Role_id = Roles.Id
     WHERE Users.Id = ?");
 $query->execute([$user_id]);
-$user_role = $query->fetch(PDO::FETCH_ASSOC)['role_name'] ?? 'Utilisateur';
+$result = $query->fetch(PDO::FETCH_ASSOC);
+$user_role = $result['role_name'] ?? 'Non défini';
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -281,7 +281,7 @@ $user_role = $query->fetch(PDO::FETCH_ASSOC)['role_name'] ?? 'Utilisateur';
                 <!-- Action Buttons -->
                 <div class="flex flex-col sm:flex-row gap-4 justify-center stagger-fade mt-8" style="animation-delay: 1.4s">
                     <button class="group relative bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white font-semibold py-4 px-8 rounded-full text-lg hover-lift magnetic-effect overflow-hidden">
-                        <span class="relative z-10">Modifier le profil</span>
+                        <a href="./modif.php"> <span class="relative z-10">Modifier le profil</span></a>
                         <div class="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </button>
                     
